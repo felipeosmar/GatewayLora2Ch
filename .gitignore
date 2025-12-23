@@ -1,3 +1,12 @@
+# ESP-IDF Build Output
+build/
+sdkconfig
+sdkconfig.old
+
+# ESP-IDF Component Manager
+managed_components/
+dependencies.lock
+
 # Prerequisites
 *.d
 
@@ -35,6 +44,7 @@
 *.i*86
 *.x86_64
 *.hex
+*.bin
 
 # Debug files
 *.dSYM/
@@ -51,5 +61,35 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-# debug information files
+# Debug information files
 *.dwo
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.cproject
+.settings/
+
+# Claude Code
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python (ESP-IDF tools)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.egg-info/
+.eggs/
+venv/
+.env
+
+# Logs
+*.log
