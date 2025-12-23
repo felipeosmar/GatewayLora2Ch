@@ -1,0 +1,159 @@
+menu "Gateway LoRaWAN 2CH Configuration"
+
+    menu "LoRa Radio Configuration"
+        config LORA_FREQUENCY_MHZ
+            int "Default frequency (MHz * 100)"
+            default 91680
+            help
+                Default frequency in MHz * 100 (e.g., 91680 = 916.8 MHz)
+                AU915 Sub-band 2: 916.8 - 918.2 MHz
+
+        config LORA_SPREADING_FACTOR
+            int "Spreading Factor (7-12)"
+            range 7 12
+            default 7
+            help
+                LoRa spreading factor. Higher = longer range, slower data rate.
+
+        config LORA_BANDWIDTH
+            int "Bandwidth (0=125kHz, 1=250kHz, 2=500kHz)"
+            range 0 2
+            default 0
+            help
+                LoRa bandwidth setting.
+
+        config LORA_CODING_RATE
+            int "Coding Rate (1=4/5, 2=4/6, 3=4/7, 4=4/8)"
+            range 1 4
+            default 1
+            help
+                LoRa coding rate for forward error correction.
+
+        config LORA_TX_POWER
+            int "TX Power (dBm)"
+            range 2 20
+            default 14
+            help
+                Transmit power in dBm.
+    endmenu
+
+    menu "SX1276 #1 (RX) Pin Configuration"
+        config SX1276_RX_CS_GPIO
+            int "Chip Select GPIO"
+            default 5
+
+        config SX1276_RX_RST_GPIO
+            int "Reset GPIO"
+            default 14
+
+        config SX1276_RX_DIO0_GPIO
+            int "DIO0 (IRQ) GPIO"
+            default 26
+
+        config SX1276_RX_DIO1_GPIO
+            int "DIO1 GPIO"
+            default 35
+
+        config SX1276_RX_DIO2_GPIO
+            int "DIO2 GPIO"
+            default 32
+    endmenu
+
+    menu "SX1276 #2 (TX) Pin Configuration"
+        config SX1276_TX_CS_GPIO
+            int "Chip Select GPIO"
+            default 4
+
+        config SX1276_TX_RST_GPIO
+            int "Reset GPIO"
+            default 27
+
+        config SX1276_TX_DIO0_GPIO
+            int "DIO0 (IRQ) GPIO"
+            default 25
+
+        config SX1276_TX_DIO1_GPIO
+            int "DIO1 GPIO"
+            default 34
+
+        config SX1276_TX_DIO2_GPIO
+            int "DIO2 GPIO"
+            default 33
+    endmenu
+
+    menu "SPI Configuration"
+        config SPI_MOSI_GPIO
+            int "MOSI GPIO"
+            default 23
+
+        config SPI_MISO_GPIO
+            int "MISO GPIO"
+            default 19
+
+        config SPI_SCK_GPIO
+            int "SCK GPIO"
+            default 18
+    endmenu
+
+    menu "W5500 Ethernet Configuration"
+        config W5500_ENABLED
+            bool "Enable W5500 Ethernet"
+            default y
+
+        config W5500_CS_GPIO
+            int "Chip Select GPIO"
+            default 15
+            depends on W5500_ENABLED
+
+        config W5500_RST_GPIO
+            int "Reset GPIO"
+            default 33
+            depends on W5500_ENABLED
+
+        config W5500_INT_GPIO
+            int "Interrupt GPIO"
+            default 36
+            depends on W5500_ENABLED
+    endmenu
+
+    menu "WiFi Configuration"
+        config WIFI_SSID
+            string "WiFi SSID"
+            default "LoRaGateway"
+            help
+                SSID of the WiFi network to connect.
+
+        config WIFI_PASSWORD
+            string "WiFi Password"
+            default ""
+            help
+                Password for the WiFi network.
+
+        config WIFI_MAX_RETRY
+            int "Maximum retry attempts"
+            default 5
+            help
+                Maximum number of WiFi connection retries.
+    endmenu
+
+    menu "LoRaWAN Server Configuration"
+        config LORAWAN_SERVER_HOST
+            string "Server hostname/IP"
+            default "router.us.thethings.network"
+            help
+                LoRaWAN server address (TTN, ChirpStack, etc.)
+
+        config LORAWAN_SERVER_PORT
+            int "Server UDP port"
+            default 1700
+            help
+                UDP port for Semtech packet forwarder protocol.
+
+        config GATEWAY_EUI
+            string "Gateway EUI (16 hex chars)"
+            default "AA555A0000000000"
+            help
+                Unique identifier for this gateway (8 bytes in hex).
+    endmenu
+
+endmenu
